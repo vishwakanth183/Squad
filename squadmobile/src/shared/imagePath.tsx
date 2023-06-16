@@ -1,0 +1,1 @@
+export const drawerImage = require('../assets/images/Drawerimage.png')

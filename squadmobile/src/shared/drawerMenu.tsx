@@ -7,27 +7,45 @@ export const FontAwesome = 'font-awesome'
 export const Ionicon = 'ionicon'
 export const AntDesign = 'antdesign'
 export const Entypo = 'entypo'
+export const Octicons = 'Octicons'
 
+
+const drawerIconSize = 25;
 
 export const drawerMenu = [
     {
         title: 'Dashboard',
-        navigateTo : TasksRoute
+        navigateTo : TasksRoute,
+        iconType : MaterialIcon,
+        iconName : 'dashboard',
+        iconSize : drawerIconSize
     },
     {
         title: 'TaskList',
-        navigateTo : TasksRoute
+        navigateTo : TasksRoute,
+        iconType : FontAwesome5,
+        iconName : 'clipboard-list',
+        iconSize : drawerIconSize
     },
     {
         title: 'Milestone',
-        navigateTo : TasksRoute
+        navigateTo : TasksRoute,
+        iconType : MaterialCommunityIcons,
+        iconName : 'star-check',
+        iconSize : drawerIconSize
     },
     {
         title: 'Leaves and permission',
-        navigateTo : TasksRoute
+        navigateTo : TasksRoute,
+        iconType : MaterialCommunityIcons,
+        iconName : 'timer-off',
+        iconSize : drawerIconSize
     },
     {
         title: 'Performance',
-        navigateTo : TasksRoute
+        navigateTo : TasksRoute,
+        iconType : MaterialCommunityIcons,
+        iconName : 'account-star',
+        iconSize : drawerIconSize
     },
 ];

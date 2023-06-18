@@ -2,6 +2,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import React, { FC } from "react";
 import { createDrawerNavigator } from '@react-navigation/drawer';
 
+
 // Custom imports
 import Tasks from "../components/tasks";
 import { TasksRoute, initialRouteName } from "./routeNames";

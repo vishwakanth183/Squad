@@ -1,0 +1,1 @@
+export const SIGIN_ERR = "Error while logging in! Please try again!"

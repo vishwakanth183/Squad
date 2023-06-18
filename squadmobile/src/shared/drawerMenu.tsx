@@ -1,4 +1,5 @@
 import { TasksRoute } from "../stack/routeNames"
+import { drawerIconSize } from "./iconSize"
 
 export const MaterialIcon = 'material'
 export const MaterialCommunityIcons = 'material-community' 
@@ -10,7 +11,6 @@ export const Entypo = 'entypo'
 export const Octicons = 'Octicons'
 
 
-const drawerIconSize = 25;
 
 export const drawerMenu = [
     {
@@ -18,6 +18,20 @@ export const drawerMenu = [
         navigateTo : TasksRoute,
         iconType : MaterialIcon,
         iconName : 'dashboard',
+        iconSize : drawerIconSize
+    },
+    {
+        title: 'Members',
+        navigateTo : TasksRoute,
+        iconType : MaterialCommunityIcons,
+        iconName : 'account',
+        iconSize : drawerIconSize
+    },
+    {
+        title: 'Labels',
+        navigateTo : TasksRoute,
+        iconType : MaterialCommunityIcons,
+        iconName : 'label-multiple',
         iconSize : drawerIconSize
     },
     {
@@ -46,6 +60,13 @@ export const drawerMenu = [
         navigateTo : TasksRoute,
         iconType : MaterialCommunityIcons,
         iconName : 'account-star',
+        iconSize : drawerIconSize
+    },
+    {
+        title: 'Logout',
+        navigateTo : TasksRoute,
+        iconType : AntDesign,
+        iconName : 'logout',
         iconSize : drawerIconSize
     },
 ];

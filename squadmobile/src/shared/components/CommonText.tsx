@@ -18,10 +18,10 @@ const commonTextStyle = StyleSheet.create({
     }
 })
 
-const smallFont = 12;
-const mediumFont = 15;
-const largeFont = 16;
-const headerFont = 18;
+const smallFont = appFonts.smallSize | 12;
+const mediumFont = appFonts.mediumSize | 15;
+const largeFont = appFonts.largeSize | 16;
+const headerFont = appFonts.headerSize | 18;
 
 const CommonText: FC<commonTextProp> = ({ style, content, bold, customFont, fontSize }) => {
 

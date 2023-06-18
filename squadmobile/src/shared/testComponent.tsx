@@ -59,7 +59,7 @@ const TestComponent: FC<{}> = ({ }) => {
     return <View>
         <Button title={'Show success toast'} onPress={() => { show('successToast') }} buttonStyle={{ marginBottom: 10 }} />
         <Button title={'Show failure toast'} onPress={() => { show('errorToast') }} buttonStyle={{ marginBottom: 10 }} />
-        <Button title={'Show Dialog'} onPress={() => { show('dialog') }} buttonStyle={{ marginBottom: 10 }} />
+        <Button title={'Show Dialog'} onPress={() => { show('dialog')  }} buttonStyle={{ marginBottom: 10 }} />
 
         <CommonDialog
             visibility={logoutConfirmation}

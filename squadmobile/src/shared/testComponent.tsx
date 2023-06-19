@@ -1,5 +1,5 @@
-import React, { FC , useState} from 'react'
-import { View } from 'react-native'
+import React, { FC, useState } from 'react'
+import { ScrollView } from 'react-native'
 import { Button } from '@rneui/themed'
 import Toast from 'react-native-toast-message'
 
@@ -7,6 +7,9 @@ import Toast from 'react-native-toast-message'
 import { SIGIN_ERR } from './errorMessages'
 import { appColors } from './appColors'
 import CommonDialog from './components/CommonDialog'
+import CommonLoader from './components/CommonLoader'
+import CommonFooterLoader from './components/CommonFooterLoader'
+import CommonEmptyComponent from './components/CommonEmptyComponent'
 
 const TestComponent: FC<{}> = ({ }) => {
 
@@ -56,10 +59,10 @@ const TestComponent: FC<{}> = ({ }) => {
     }
 
 
-    return <View>
+    return <ScrollView contentContainerStyle={{flex:1 , justifyContent : 'center' , alignItems : 'center'}}>
         <Button title={'Show success toast'} onPress={() => { show('successToast') }} buttonStyle={{ marginBottom: 10 }} />
         <Button title={'Show failure toast'} onPress={() => { show('errorToast') }} buttonStyle={{ marginBottom: 10 }} />
-        <Button title={'Show Dialog'} onPress={() => { show('dialog')  }} buttonStyle={{ marginBottom: 10 }} />
+        <Button title={'Show Dialog'} onPress={() => { show('dialog') }} buttonStyle={{ marginBottom: 10 }} />
 
         <CommonDialog
             visibility={logoutConfirmation}
@@ -67,7 +70,14 @@ const TestComponent: FC<{}> = ({ }) => {
             description={logoutProps.description}
             actionButtons={logoutProps.actionButtons}
         />
-    </View>
+
+        <CommonLoader />
+
+        <CommonFooterLoader />
+
+        <CommonEmptyComponent />
+
+    </ScrollView>
 }
 
 export default TestComponent

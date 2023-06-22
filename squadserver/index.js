@@ -6,6 +6,8 @@ dotenv.config()
 app = express();
 app.use(cors())
 app.use(express.json())
+const routers = require('./routes/indexRoutes')
+app.use(routers)
 
 
 // DEV - process.env.MANGODB_URL

@@ -3,11 +3,11 @@ const mongoose = require('mongoose')
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: [true, "email is required"]
+        required: [true, "UserName is required"]
     },
     email: {
         type: String,
-        required: [true, "username is required"],
+        required: [true, "Email is required"],
         unique: [true, "Email already exists"],
         match: [
             /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
@@ -17,13 +17,10 @@ const UserSchema = new mongoose.Schema({
     phno: {
         type: Number,
         required: true,
-        min: [10, 'Invalid phone number'],
-        max: [10, 'Invalid phone number'],
-        match: [/^\d{10}/, 'Invalid phone number']
     },
     password: {
         type: String,
-        required: [true, "password is required"],
+        required: [true, "Password is required"],
         match: [
             /^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]+$/,
             'Password must contain at least 1 uppercase letter, 1 lowercase letter, 1 number and a special characters'

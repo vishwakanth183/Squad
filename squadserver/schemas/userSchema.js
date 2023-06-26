@@ -1,4 +1,5 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -32,5 +33,31 @@ const UserSchema = new mongoose.Schema({
     }
 }, { timestamps: true }
 )
+
+UserSchema.pre('save', async function (next) {
+    try {
+      // Generate a salt
+      const salt = await bcrypt.genSalt(10);
+  
+      // Hash the password
+      const hashedPassword = await bcrypt.hash(this.password, salt);
+  
+      // Replace the plain password with the hashed password
+      this.password = hashedPassword;
+      next();
+    } catch (error) {
+      next(error);
+    }
+  });
+
+  UserSchema.methods.comparePassword = async function (password) {
+    try {
+      // Compare the provided password with the hashed password
+      const isMatch = await bcrypt.compare(password, this.password);
+      return isMatch;
+    } catch (error) {
+      throw error;
+    }
+  };
 
 module.exports = mongoose.model('Users', UserSchema)

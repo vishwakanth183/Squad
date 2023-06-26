@@ -2,6 +2,8 @@ import React, { FC, useState } from 'react'
 import { ScrollView } from 'react-native'
 import { Button } from '@rneui/themed'
 import Toast from 'react-native-toast-message'
+// import * as Crypto from 'react-native-crypto'
+import * as Crypto from 'react-native-crypto-js'
 
 // Custom imports
 import { SIGIN_ERR } from './errorMessages'
@@ -36,6 +38,14 @@ const TestComponent: FC<{}> = ({ }) => {
                 onPress: () => setLogoutConfirmation(false)
             }
         ]
+    }
+
+    const encryptanddecryptTest = () =>{
+        let encrypt = Crypto.AES.encrypt('User@1234','squad').toString()
+        console.log(encrypt)
+        let decrypt = Crypto.AES.decrypt(encrypt,'squad')
+        const result = decrypt.toString(Crypto.enc.Utf8).replace('|', /\\/g);
+        console.log(result)
     }
 
     const show = (messageType: String) => {
@@ -76,6 +86,8 @@ const TestComponent: FC<{}> = ({ }) => {
         <CommonFooterLoader />
 
         <CommonEmptyComponent />
+
+        <Button title={'Console Crypto text'} onPress={() => { encryptanddecryptTest() }} buttonStyle={{ marginBottom: 10 }} />
 
     </ScrollView>
 }

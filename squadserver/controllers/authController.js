@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 const UserSchema = require("../schemas/userSchema")
 const CryptoJS = require('crypto-js');
 const { STATUS_CODES } = require('../services/statusCodeService');
-const {CUSTOM_ERRORS} = require('../services/errorService')
+const { CUSTOM_ERRORS } = require('../services/errorService')
 
 //Function to delete a user from the user collection
 const createUser = async (req, res) => {
@@ -16,7 +16,6 @@ const createUser = async (req, res) => {
 module.exports.createUser = createUser
 
 // Function to signin an user
-
 const signin = async (req, res) => {
 
     try {

@@ -1,8 +1,12 @@
 export const appColors = {
-    primary : 'violet',
+    primary : 'gold',
+    secondary : 'coral',
     dark : 'black',
     light : 'white',
     green : 'green',
     red : 'red',
-    grey : 'grey'
+    grey : 'grey',
+    borderColor : '#ddd',
+    inputIconColor : 'grey',
+    violet : 'violet'
 }

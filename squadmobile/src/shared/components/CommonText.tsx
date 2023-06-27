@@ -1,5 +1,7 @@
 import React, { FC, useEffect } from "react";
 import { Text, StyleProp, TextStyle, StyleSheet } from 'react-native'
+
+// Custom imports
 import { appFonts } from "../appFonts";
 
 

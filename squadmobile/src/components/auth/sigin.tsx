@@ -13,6 +13,10 @@ import { signinBackground } from "../../shared/imagePath";
 import { StatusBar } from "react-native";
 import { TouchableOpacity } from "react-native";
 
+// Redux functions
+import { useAppDispatch } from "../../redux/store";
+import { loginCheck } from "../../redux/slices/authSlice";
+
 const signinStyles = StyleSheet.create({
     mainView: { flex: 1, backgroundColor: appColors.light, paddingVertical: 20, alignItems: 'center', justifyContent: 'center' },
     buttonRow: { flexDirection: 'row', alignItems: 'center', marginTop: 20 }
@@ -34,15 +38,18 @@ const Signin: FC<{}> = ({ }) => {
             .required('Password is required'),
     })
 
+    // Variable to handle redux dipatch pattern
+    const dispatch = useAppDispatch();
+
     // Form value initialization using formik
     const signinFormik = useFormik({
         validationSchema : signinValidationSchema,
         initialValues: {
-            username: '',
-            password: ''
+            username: 'Admin@mailinator.com',
+            password: 'Admin@1234'
         },
         onSubmit: (values) => {
-            console.log(values);
+            dispatch(loginCheck(values));
         },
     })
 
@@ -93,7 +100,7 @@ const Signin: FC<{}> = ({ }) => {
                 {/* Signin Button */}
                 <CommonButton
                     title="Login"
-                    disabled={!signinFormik.isValid || !signinFormik.dirty}
+                    // disabled={!signinFormik.isValid || !signinFormik.dirty}
                     fontSize="large"
                     backgroundColor={appColors.primary}
                     titleColor={appColors.dark}

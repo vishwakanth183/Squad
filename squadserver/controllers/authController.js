@@ -19,11 +19,10 @@ module.exports.createUser = createUser
 const signin = async (req, res) => {
 
     try {
-        const { mail, password } = req.body;
+        const { username, password } = req.body;
 
         const decryptedPassword = CryptoJS.AES.decrypt(password, process.env.CRYPTO_KEY).toString(CryptoJS.enc.Utf8);
-
-        let userInfo = await UserSchema.findOne({ email: mail })
+        let userInfo = await UserSchema.findOne({ email: username })
 
         if (userInfo) {
             const isPasswordMatch = await userInfo.comparePassword(decryptedPassword);

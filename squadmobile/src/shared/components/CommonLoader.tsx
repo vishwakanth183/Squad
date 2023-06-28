@@ -2,7 +2,7 @@ import React, { FC } from "react";
 import { View } from "react-native"
 import Lottie from 'lottie-react-native';
 
-const CommonLoader: FC<{}> = ({ }) => {
+const CommonLoader: FC<{ isFullScreen?: boolean }> = ({ isFullScreen }) => {
 
     // variable to handle loader file
     const commonLottieLoader = require('../lottieFiles/appLoader.json')
@@ -10,8 +10,8 @@ const CommonLoader: FC<{}> = ({ }) => {
     // variable to handle common loader width and height
     const loaderDimension = 80
 
-    return <View style={{alignItems : 'center' , justifyContent : 'center'}}>
-        <Lottie source={commonLottieLoader} style={{height : loaderDimension , width : loaderDimension}} autoPlay/>
+    return <View style={{ alignItems: 'center', justifyContent: 'center', ...isFullScreen && { flex: 1 } }}>
+        <Lottie source={commonLottieLoader} style={{ height: loaderDimension, width: loaderDimension }} autoPlay />
     </View>
 }
 

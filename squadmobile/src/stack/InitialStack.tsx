@@ -10,12 +10,16 @@ import { TasksRoute, initialRouteName } from "./routeNames";
 import CustomDrawer from "./CustomDrawer";
 import { RootState, useAppDispatch } from "../redux/store";
 import CommonLoader from "../shared/components/CommonLoader";
-import { checkToken, closeAppLoader } from "../redux/slices/authSlice";
+import { closeAppLoader, userPatch } from "../redux/slices/authSlice";
 import Signin from "../components/auth/sigin";
 import { getToken } from "../services/asyncTokenService";
 import { AsyncTokens } from "../shared/asyncTokens";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import InitializeToast from "../shared/customizedToast/initializeToast";
 
-const InitialStack: FC<{}> = () => {
+
+
+const InitialStack: FC<{}> = ({}) => {
 
     const Drawer = createDrawerNavigator();
 
@@ -27,10 +31,16 @@ const InitialStack: FC<{}> = () => {
 
     // Function to check whether the user has logged in
     const loginCheck = async() =>{
-        const userToken = await getToken(AsyncTokens.userToken);
-        const userDetails = await getToken(AsyncTokens.userDetails);
-        console.log('userToken',userToken);
-        console.log('userDetails',userDetails)
+        const userToken = await AsyncStorage.getItem(AsyncTokens.userToken);
+        const userDetails = await AsyncStorage.getItem(AsyncTokens.userDetails);
+        if(userToken && userDetails)
+        {
+            disptach(userPatch(JSON.parse(userDetails)))
+        }
+        else
+        {
+            disptach(closeAppLoader())
+        }
     }
 
     useEffect(() => {
@@ -43,6 +53,7 @@ const InitialStack: FC<{}> = () => {
 
     return (
         <NavigationContainer>
+            <InitializeToast />
             {
                 auth?.isLoggedIn ?
                     <Drawer.Navigator

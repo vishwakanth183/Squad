@@ -1,5 +1,5 @@
 export const appColors = {
-    primary : 'gold',
+    primary : 'violet',
     secondary : 'coral',
     dark : 'black',
     light : 'white',

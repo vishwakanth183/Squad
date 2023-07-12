@@ -18,8 +18,10 @@
     "@reduxjs/toolkit": "^1.9.5",
     "@rneui/base": "^4.0.0-rc.7",
     "@rneui/themed": "^4.0.0-rc.7",
+    "@testing-library/jest-native": "^5.4.2",
     "axios": "^1.4.0",
     "formik": "^2.4.2",
+    "jest-mock-axios": "^4.7.2",
     "lottie-react-native": "^5.1.6",
     "react": "18.2.0",
     "react-native": "0.71.10",
@@ -30,8 +32,8 @@
     "react-native-screens": "^3.20.0",
     "react-native-toast-message": "^2.1.6",
     "react-native-vector-icons": "^9.2.0",
-    "react-redux": "^8.1.0"
     "react-redux": "^8.1.0",
+    "redux-mock-store": "^1.5.4",
     "yup": "^1.2.0"
   },
   "devDependencies": {
@@ -39,6 +41,7 @@
     "@babel/preset-env": "^7.20.0",
     "@babel/runtime": "^7.20.0",
     "@react-native-community/eslint-config": "^3.2.0",
+    "@testing-library/react-native": "^12.1.2",
     "@tsconfig/react-native": "^2.0.2",
     "@types/jest": "^29.2.1",
     "@types/react": "^18.0.24",
@@ -52,6 +55,21 @@
     "typescript": "4.8.4"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "ts",
+      "tsx"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "collectCoverage": true,
+    "transformIgnorePatterns": [
+      "node_modules/(?!(@react-native|react-native|@rneui/themed|react-native-size-matters|@rneui/base|react-native-ratings|react-native-vector-icons)/)"
+    ],
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-native/extend-expect"
+    ]
   }
 }

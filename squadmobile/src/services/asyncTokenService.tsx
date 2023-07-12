@@ -5,7 +5,8 @@ export const getToken = async (tokenName: string) => {
     await AsyncStorage.getItem(tokenName).then((tokenRes) => {
         console.log(`${tokenName}`,tokenRes)
         return tokenRes
-    }).catch(() => {
+    }).catch((err) => {
+        console.log(`${tokenName}`,err)
         return null
     })
 }

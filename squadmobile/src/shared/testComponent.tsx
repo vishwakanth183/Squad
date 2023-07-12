@@ -42,10 +42,10 @@ const TestComponent: FC<{}> = ({ }) => {
 
     const encryptanddecryptTest = () =>{
         let encrypt = Crypto.AES.encrypt('User@1234','squad').toString()
-        console.log(encrypt)
         let decrypt = Crypto.AES.decrypt(encrypt,'squad')
-        const result = decrypt.toString(Crypto.enc.Utf8).replace('|', /\\/g);
-        console.log(result)
+        console.log(encrypt)
+        // const result = decrypt.toString(Crypto.enc.Utf8).replace('|', /\\/g);
+        // console.log(result)
     }
 
     const show = (messageType: String) => {

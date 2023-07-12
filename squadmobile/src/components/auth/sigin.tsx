@@ -88,7 +88,7 @@ const Signin: FC<{}> = ({ }) => {
                 secureTextEntry={!showpassword}
                 leftIcon={<MaterialCommunityIcons name="key" size={mediumIconSize} color={appColors.light} />}
                 rightIcon={<TouchableOpacity onPress={() => { setShowPassword(!showpassword) }}>
-                    <MaterialCommunityIcons name={showpassword ? "eye-off" : "eye"} size={mediumIconSize} color={appColors.light} />
+                    <MaterialCommunityIcons testID="eye" name={showpassword ? "eye-off" : "eye"} size={mediumIconSize} color={appColors.light} />
                 </TouchableOpacity>}
                 errorMessage={signinFormik.touched.password && signinFormik.errors.password ? signinFormik.errors.password : '' }
                 onChangeText={signinFormik.handleChange('password')}

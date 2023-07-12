@@ -2,7 +2,7 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit"
 
 // Custom imports
 import AuthService from "../../services/authService";
-import { getToken, setToken } from "../../services/asyncTokenService";
+import { getToken, removeToken, setToken } from "../../services/asyncTokenService";
 import { AsyncTokens } from "../../shared/asyncTokens";
 
 
@@ -15,7 +15,7 @@ interface authTemplate {
 }
 
 // initial state for auth slice
-const authInititalState = {
+export const authInititalState = {
     appLoading: true,
     authLoader: false,
     isLoggedIn: false,
@@ -33,15 +33,19 @@ type ValidUser = {
     token: string
 }
 
+type userPatch = {
+    role : any
+}
+
 
 // Async thunk to check whether the userinfo is valid
 export const loginCheck = createAsyncThunk<ValidUser, loginCredentials>(
     'loginCheck',
     async (credentials) => {
         const userInfo = await AuthService.loginCheck(credentials)
-        console.log("userInfo",userInfo);
-        const validUser: ValidUser = userInfo;
-        return validUser;
+        // console.log("userInfo",userInfo);
+        // const validUser: ValidUser = userInfo;
+        return userInfo;
     })
 
 const authSlice = createSlice({
@@ -51,40 +55,35 @@ const authSlice = createSlice({
         activateAppLoader: (state) => { state.appLoading = true },
         closeAppLoader: (state) => { state.appLoading = false },
         setUserDetails: (state, action: PayloadAction<authTemplate>) => {
-            state.isLoggedIn = true,
+                state.isLoggedIn = true,
                 state.isAdmin = action.payload.isAdmin,
                 state.userInfo = action.payload.userInfo
         },
         logout: (state) => {
-            state.isAdmin = false,
+                state.isAdmin = false,
                 state.isLoggedIn = false,
-                state.userInfo = {}
+                state.userInfo = {},
+                removeToken(AsyncTokens.userDetails);
+                removeToken(AsyncTokens.userToken);
         },
-        checkToken : (state ) =>{
-            const userToken = getToken(AsyncTokens.userToken);
-            const userDetails = getToken(AsyncTokens.userDetails);
-            console.log("userDetails", userDetails)
-            if(userToken && userDetails)
-            {
-                // state.userInfo = userDetails;
-                state.appLoading = false;
-                // state.isAdmin = userDetails.role === "Admin" ? true : false;
-                // state.isLoggedIn = true;
+        userPatch : (state , action : PayloadAction<userPatch>) =>{
+            // console.log("userPatch", action.payload);
+            state.userInfo = action.payload;
+            state.appLoading = false;
+            if (action.payload.role === "Admin") {
+                state.isAdmin = true;
             }
-            else
-            {
-                state.appLoading = false
-            }
+            state.isLoggedIn = true
         }
     },
     extraReducers: (builder) => {
         builder.addCase(loginCheck.pending, (state) => {
             state.authLoader = true;
-            console.log('userInfo pending')
+            // console.log('userInfo pending')
         });
         builder.addCase(loginCheck.fulfilled, (state, action: PayloadAction<ValidUser>) => {
 
-            console.log("reponse from login check", action);
+            // console.log("reponse from login check", action);
 
             state.authLoader = false;
             if (action.payload) {
@@ -107,6 +106,6 @@ const authSlice = createSlice({
     },
 })
 
-export const { activateAppLoader, closeAppLoader, setUserDetails, logout , checkToken} = authSlice.actions;
+export const { activateAppLoader, closeAppLoader, setUserDetails, logout , userPatch } = authSlice.actions;
 
 export default authSlice.reducer;
